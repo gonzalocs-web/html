@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abogado Ramirez - Derecho Penal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+/* ==========================================
+   VARIABLES & RESET
+   ========================================== */
+:root {
+    --bg: #1a0a0a;
+    --bg2: #240d0d;
+    --bg3: #2e1010;
+    --accent: #c5963a;
+    --accent2: #e8b455;
+    --text: #f0e6d3;
+    --text-muted: #a08070;
+    --white: #ffffff;
+    --radius: 10px;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    --transition: 0.3s ease;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background: rgba(26, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(197, 150, 58, 0.25);
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+/* NAV */
+.nav ul {
+    display: flex;
+    list-style: none;
+    gap: clamp(10px, 2vw, 30px);
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: var(--text-muted);
+    font-size: clamp(0.78rem, 1.2vw, 0.95rem);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color var(--transition);
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+/* HAMBURGER (oculto en desktop) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--text);
+    border-radius: 3px;
+    transition: var(--transition);
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ==========================================
+   BOTÓN CTA GLOBAL
+   ========================================== */
+.btn-cta {
+    display: inline-block;
+    background: var(--accent);
+    color: #1a0a0a;
+    font-weight: 700;
+    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: clamp(12px, 2vw, 16px) clamp(24px, 4vw, 40px);
+    border-radius: 50px;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 4px 20px rgba(197, 150, 58, 0.35);
+    margin-top: 10px;
+    white-space: nowrap;
+}
+
+.btn-cta:hover {
+    background: var(--accent2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(197, 150, 58, 0.5);
+}
+
+/* ==========================================
+   SECTION COMÚN
+   ========================================== */
+.section-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: var(--text);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.section-title span {
+    color: var(--accent);
+}
+
+/* ==========================================
+   HERO
+   ========================================== */
+.hero {
+    min-height: 100vh;
+    padding: clamp(100px, 15vh, 140px) 5% clamp(60px, 10vh, 100px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    background: linear-gradient(135deg, #1a0a0a 0%, #000000 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 40%, rgba(197, 150, 58, 0.07) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.hero-content {
+    flex: 1 1 300px;
+    max-width: 600px;
+    z-index: 1;
+}
+
+.hero-tag {
+    font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 8vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: var(--accent);
+}
+
+.hero-sub {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    color: var(--text-muted);
+    margin-bottom: 36px;
+    max-width: 480px;
+    line-height: 1.7;
+}
+
+.hero-img {
+    flex: 1 1 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.hero-img img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(197, 150, 58, 0.3);
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+/* ==========================================
+   SOBRE MÍ
+   ========================================== */
+.about {
+    background: var(--bg2);
+    padding: clamp(60px, 10vh, 110px) 0;
+}
+
+.about-text {
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    color: var(--text-muted);
+    max-width: 800px;
+    margin-bottom: 50px;
+    line-height: 1.8;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+.card {
+    background: var(--bg3);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow);
+}
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+}
+
+.card h3 {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.card p {
+    font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* ==========================================
+   TURNOS
+   ========================================== */
+.turnos {
+    background: var(--bg);
+    padding: clamp(60px, 10vh, 110px) 0;
+    text-align: center;
+}
+
+.turnos-sub {
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ==========================================
+   CONTACTO
+   ========================================== */
+.contacto {
+    background: var(--bg2);
+    padding: clamp(60px, 10vh, 110px) 0;
+}
+
+.contacto-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 500px;
+    margin: 30px auto 0;
+    width: 100%;
+}
+
+.contacto-container input {
+    width: 100%;
+    padding: 14px 20px;
+    background: var(--bg3);
+    border: 1px solid rgba(197, 150, 58, 0.25);
+    border-radius: 50px;
+    color: var(--text);
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    transition: border-color var(--transition);
+    outline: none;
+}
+
+.contacto-container input::placeholder {
+    color: var(--text-muted);
+}
+
+.contacto-container input:focus {
+    border-color: var(--accent);
+}
+
+.contacto-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+.footer {
+    background: #000;
+    text-align: center;
+    padding: 30px 5%;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid #2a1a1a;
+}
+
+/* ==========================================
+   RESPONSIVE — TABLET (≤ 900px)
+   ========================================== */
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 120px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .hero-sub {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-img img {
+        max-width: 280px;
+    }
+}
+
+/* ==========================================
+   RESPONSIVE — MÓVIL (≤ 640px)
+   ========================================== */
+@media (max-width: 640px) {
+
+    /* Header: mostrar hamburguesa */
+    .hamburger {
+        display: flex;
+    }
+
+    .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(26, 10, 10, 0.98);
+        border-top: 1px solid rgba(197, 150, 58, 0.2);
+        padding: 20px 5%;
+    }
+
+    .nav.open {
+        display: block;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .nav ul li {
+        border-bottom: 1px solid rgba(197, 150, 58, 0.1);
+    }
+
+    .nav-link {
+        display: block;
+        padding: 14px 0;
+        font-size: 0.95rem;
+    }
+
+    /* Hero */
+    .hero {
+        padding-top: 100px;
+        gap: 30px;
+    }
+
+    .hero-img img {
+        max-width: 220px;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contacto-container {
+        padding: 0 5%;
+    }
+}
+
+/* ==========================================
+   RESPONSIVE — MUY PEQUEÑO (≤ 380px)
+   ========================================== */
+@media (max-width: 380px) {
+    .logo {
+        font-size: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .btn-cta {
+        padding: 12px 22px;
+        font-size: 0.8rem;
+    }
+}
+</style>
+<body>
+
+    <!-- HEADER -->
+    <header id="header">
+        <div class="header-inner">
+            <a href="#inicio" class="logo">Abogado <span>Ramirez</span></a>
+
+            <!-- Botón hamburguesa (visible solo en móvil) -->
+            <button class="hamburger" id="hamburger" aria-label="Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="nav" id="nav">
+                <ul>
+                    <li><a href="#inicio" id="inicio" class="nav-link">Inicio</a></li>
+                    <li><a href="#sobreMi" id="sobreMi" class="nav-link">Sobre mí</a></li>
+                    <li><a href="#turnos" id="turnos" class="nav-link">Turnos</a></li>
+                    <li><a href="#contacto" id="contacto" class="nav-link">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <p class="hero-tag">Especialista en Derecho Penal</p>
+            <h1>Abogado<br><span>Ramirez</span></h1>
+            <p class="hero-sub">Litigio Penal Complejo · Defensa y Asistencia · Más de 15 años de experiencia</p>
+            <a href="#turnos" class="btn-cta">AGENDA TU TURNO</a>
+        </div>
+        <div class="hero-img">
+            <img src="img/Abg.png" alt="Abogado Ramirez">
+        </div>
+    </section>
+
+    <!-- SOBRE MÍ -->
+    <section class="about" id="sobreMi">
+        <div class="section-container">
+            <h2 class="section-title">Sobre <span>mí</span></h2>
+            <p class="about-text">
+                Con más de 15 años de experiencia en el sistema penal, el Dr. Julián Ramirez se ha consolidado como un
+                referente en litigación compleja. Graduado con honores de la Universidad de Buenos Aires y con un Máster en
+                Derecho Penal por la Universidad de Salamanca, ha liderado defensas en casos de gran impacto público.
+                Su enfoque combina agresividad técnica en el tribunal con un trato humano y cercano hacia el cliente.
+            </p>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">⚖️</div>
+                    <h3>Derecho Penal Económico</h3>
+                    <p>Delitos de guante blanco, evasión tributaria, lavado de activos y fraudes corporativos.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🛡️</div>
+                    <h3>Criminalidad Compleja</h3>
+                    <p>Defensa técnica en delitos contra la propiedad, integridad física y narcotráfico.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📋</div>
+                    <h3>Recursos de Casación</h3>
+                    <p>Apelaciones y recursos extraordinarios ante la Corte Suprema para revertir sentencias.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🚨</div>
+                    <h3>Asistencia al Detenido</h3>
+                    <p>Guardia permanente para intervenciones inmediatas en allanamientos y detenciones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TURNOS -->
+    <section class="turnos" id="turnos">
+        <div class="section-container">
+            <h2 class="section-title">Agenda tu <span>Turno</span></h2>
+            <p class="turnos-sub">Completá el formulario y te contactamos a la brevedad para coordinar una consulta.</p>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contacto" id="contacto">
+        <div class="section-container">
+            <h2 class="section-title">Con<span>tacto</span></h2>
+            <div class="contacto-container">
+                <input type="text" placeholder="Tu nombre completo">
+                <input type="email" placeholder="Tu correo electrónico">
+                <input type="tel" placeholder="Tu número de teléfono">
+                <p class="contacto-note">Nos comunicaremos contigo a la brevedad posible.</p>
+                <a href="#" class="btn-cta">ENVIAR CONSULTA</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2026 Abogado Ramirez · Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
